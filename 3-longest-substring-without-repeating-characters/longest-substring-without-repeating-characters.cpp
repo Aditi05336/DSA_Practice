@@ -5,19 +5,19 @@ public:
         if(n==0){
             return 0;
         }
-        int right=0;
-        int left=0;
+        map<int,int>mapp;
+        int r=0;
+        int l=0;
         int ans = INT_MIN;
-        unordered_map<char, int>mapp;
-        while(right<n){
-            mapp[s[right]]++;
-            while(mapp[s[right]]>1){
-                mapp[s[left]]--;
-                left++;
+        while(r<n){
+            mapp[s[r]]++;
+            while(mapp[s[r]]>1){
+                mapp[s[l]]--;
+                l++;
             }
-            ans = max(ans, right-left+1);
+            ans= max(ans,r-l+1);
 
-            right++;
+            r++;
 
         }
         return ans;
