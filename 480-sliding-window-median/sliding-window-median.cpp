@@ -47,27 +47,32 @@ public:
 
 class Solution {
 public:
+    double find_median(vector<int>& ans) {
+        int m = ans.size();
+        if (m % 2 == 0) {
+            int mid = m / 2;
+            return ((double)ans[mid - 1] + ans[mid]) / 2.0;
+        }
+        return ans[m / 2];
+    }
+
     vector<double> medianSlidingWindow(vector<int>& a, int k) {
         int n = a.size();
         vector<double> res;
+        int r = 0, l = 0;
+        vector<int> ans;   // always kept sorted
 
-        multiset<int> window(a.begin(), a.begin() + k);
-        auto mid = next(window.begin(), k / 2);   // upper median
+        while (r < n) {
+            // insert a[r] at its sorted place
+            ans.insert(lower_bound(ans.begin(), ans.end(), a[r]), a[r]);
 
-        for (int i = k; ; i++) {
-            // median of current window
-            if (k % 2) res.push_back(*mid);
-            else res.push_back(((double)*mid + (double)*prev(mid)) / 2.0);
-
-            if (i == n) break;
-
-            // add new element
-            window.insert(a[i]);
-            if (a[i] < *mid) mid--;
-
-            // remove old element (a[i-k])
-            if (a[i - k] <= *mid) mid++;
-            window.erase(window.lower_bound(a[i - k]));
+            if (r - l + 1 == k) {
+                res.push_back(find_median(ans));
+                // erase a[l] from sorted place
+                ans.erase(lower_bound(ans.begin(), ans.end(), a[l]));
+                l++;
+            }
+            r++;
         }
         return res;
     }
