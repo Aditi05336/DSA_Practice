@@ -10,8 +10,9 @@ public:
                 if(st.empty()){
                     return false;
                 }
-                if((c==')' && st.top()=='(')  || (c=='}' && st.top()=='{') || (c==']' && st.top()=='[')){
+                if((c==')' && st.top()=='(') || (c=='}' && st.top()=='{') || c==']' && st.top()=='[' ){
                     st.pop();
+
                 }
                 else{
                     return false;
