@@ -16,7 +16,7 @@ public:
             res.push_back(v[i].second);
         }
         return res;
-        */
+        
         vector<pair<int,int>>v;
         for(auto it:mapp){
             v.push_back({it.second,it.first});
@@ -28,6 +28,23 @@ public:
 
         }
         return res;
+
+        */
+
+        priority_queue<pair<int,int>>q;
+
+        for(auto it:mapp){
+            q.push({it.second,it.first});
+        }
+        vector<int>res;
+
+        for(int i=0;i<k;i++){
+            res.push_back(q.top().second);
+            q.pop();
+        }
+        return res;
+
+
 
         
     }
