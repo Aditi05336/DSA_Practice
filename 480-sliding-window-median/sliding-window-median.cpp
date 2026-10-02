@@ -56,6 +56,14 @@ public:
         return ans[m / 2];
     }
 
+    double find_medain(multiset<int>&st){
+        int m = st.size();
+        auto mid= next(st.begin(),m/2);
+        if(m%2==0){
+            return ((double) *prev(mid)+*mid)/2.0;
+        }
+        return *mid;
+    }
     vector<double> medianSlidingWindow(vector<int>& a, int k) {
         int n = a.size();
         vector<double> res;
@@ -75,5 +83,6 @@ public:
             r++;
         }
         return res;
+        
     }
 };
