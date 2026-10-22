@@ -11,6 +11,15 @@
  */
 class Solution {
 public:
+    vector<int>res;
+    void solve(TreeNode* root){
+        if(root==NULL){
+            return ;
+        }
+        solve(root->left);
+        res.push_back(root->val);
+        solve(root->right);
+    }
     /*void inorder(TreeNode* root,vector<int>&res){
         if(root==NULL){
             return ;
@@ -24,7 +33,7 @@ public:
        /* vector<int>res;
         inorder(root,res);
         return res;
-        */
+        
 
         vector<int>res;
         TreeNode*node=root;
@@ -44,6 +53,13 @@ public:
             }
 
         }
+        return res;
+        */
+        res.clear();
+        if(root==NULL){
+            return res;
+        }
+        solve(root);
         return res;
 
 
